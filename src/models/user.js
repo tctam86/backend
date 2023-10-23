@@ -2,24 +2,25 @@
 import Sequelize from "sequelize";
 import db from ".";
 
-const HocSinh = db.sequelize.define(
-  "hocsinh",
+const User = db.sequelize.define(
+  "user",
   {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    name: Sequelize.STRING,
-    age: Sequelize.INTEGER,
+    username: Sequelize.STRING,
+    email: Sequelize.STRING,
+    password: Sequelize.STRING,
+    photo: Sequelize.STRING,
+    role: {
+      type: Sequelize.STRING,
+      defaultValue: "user",
+    }
   },
   {
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
   }
 );
-HocSinh
-module.exports = HocSinh;
+User;
+module.exports = User;
 
 // module.exports = (sequelize) => {
 //   class HocSinh extends Model {

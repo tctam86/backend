@@ -2,8 +2,9 @@ import express from "express";
 import bodyParser from "body-parser"; // /user?id=7 de lay duoc id thi phai dung bodyParser
 import viewEngine from "./config/viewEngine";
 import initWebRoutes from "./route/web";
-import HocSinh from "./models/user";
-
+import User from "./models/user";
+import allcode from "./models/allcode";
+import connectDB from "./config/connectDB";
 
 require('dotenv').config();
 
@@ -15,10 +16,11 @@ let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
+
 viewEngine(app);
 initWebRoutes(app);
-const name ="Hunglon";
-const age = 23;
+connectDB();
+
 
 
 // sql.query(`INSERT INTO hocsinh (name, age) VALUES ("${name}",${age})`, function (error, results, fields) {
@@ -28,7 +30,7 @@ const age = 23;
 //     })
     
 // })
-HocSinh.findAll().then((data) => {
+User.findAll().then((data) => {
     console.log(data);
 })
 
